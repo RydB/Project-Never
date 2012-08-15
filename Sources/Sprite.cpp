@@ -5,7 +5,9 @@ Sprite::Sprite(){
     spriteSheetAttributes.clips = NULL;
 }
 
-Sprite::~Sprite() {}
+Sprite::~Sprite() {
+    if(spriteSheetAttributes.clips != NULL) delete [] spriteSheetAttributes.clips;
+}
 
 void Sprite::setupCollider(int xo, int yo, int ho, int wo){
     collisionAttributes.x_offset = xo;
@@ -50,8 +52,8 @@ void Sprite::setActiveClip(int a) {
 int Sprite::getActiveClip() const {
     return spriteSheetAttributes.active;
 }
-void Sprite::draw() const {
-    uti::apply_surface(_x, _y, spriteSheetAttributes.sheet, spriteSheetAttributes.destination,
+void Sprite::draw(const SDL_Rect& camera) const {
+    uti::apply_surface(_x-camera.x, _y-camera.y , spriteSheetAttributes.sheet, spriteSheetAttributes.destination,
                         &spriteSheetAttributes.clips[spriteSheetAttributes.active]);
 }
 
@@ -75,5 +77,4 @@ SDL_Rect Sprite::box() const {
 bool Sprite::collision(SDL_Rect other) const {
     return uti::check_collision(collisionAttributes._box, other);
 }
-
 
