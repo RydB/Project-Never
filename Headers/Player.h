@@ -30,10 +30,11 @@ public:
         RIGHT1,
         RIGHT2,
         DOWN1,
+        DOWN2,
         UP2,
-        UP1,
-        DOWN2
+        UP1
     };
+
 
     static const std::string HEART;
     static const int HEART_RES;
