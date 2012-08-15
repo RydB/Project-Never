@@ -29,7 +29,7 @@ public:
     //SpriteSheet functions
     void setActiveClip(int a);
     int getActiveClip() const;
-    void draw() const;
+    void draw(const SDL_Rect& camera) const;
     int getResolution() const;
     SDL_Surface* getDest();
 
