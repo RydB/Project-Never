@@ -37,7 +37,7 @@ void Sprite::setupSheet(SDL_Surface* dest, std::string file, int numClips, int a
     int res = spriteSheetAttributes.res;
     for(int i = 0; i < spriteSheetAttributes.sheetrows; ++i){
         for(int j = 0; j < spriteSheetAttributes._numClips/spriteSheetAttributes.sheetrows; ++j){
-            spriteSheetAttributes.clips[index].x = (i * res) + (j * res);
+            spriteSheetAttributes.clips[index].x = j * res;
             spriteSheetAttributes.clips[index].y = i * res;
             spriteSheetAttributes.clips[index].h = res;
             spriteSheetAttributes.clips[index].w = res;
