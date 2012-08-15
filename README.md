@@ -1,6 +1,8 @@
-Project Never - AKA MazeWarrio
-v0.0.5
+~~Project Never - AKA MazeWarrior
+v0.0.5~~
 
+
+-Note the Old Version actually is quite buggy.  Deletion of that folder is planned.  
 -Current version compiles assuming you have properly set up SDL.
 
 -This version now has working collision deetection and proper camera positioning.  
