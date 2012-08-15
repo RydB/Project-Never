@@ -1,5 +1,5 @@
-~~*Project Never - AKA MazeWarrior
-v0.0.5*~~
+*Project Never - AKA MazeWarrior
+v0.0.5*
 
 
 -Note the Old Version actually is quite buggy.  Deletion of that folder is planned.  
