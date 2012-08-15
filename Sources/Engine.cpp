@@ -20,13 +20,13 @@ void Engine::run(){
 
 void Engine::render(){
 	levels[currLevel].drawMap(screen);
-	player.animate();
+	player.animate(levels[0]);
 	SDL_Flip(screen);
 }
 
 void Engine::processInput(){
 	while(SDL_PollEvent(&event)){
-        Direction playerDir;
+        Direction playerDir = NONE;
 
         if(event.type == SDL_KEYDOWN){
             switch(event.key.keysym.sym ){
@@ -45,56 +45,24 @@ void Engine::processInput(){
                 default:
                 break;
             }
-            player.move(playerDir, levels[currLevel]);
-            player.updateCamera(levels[currLevel]);
+
         }
+        player.move(playerDir, levels[currLevel]);
+        player.updateCamera(levels[currLevel]);
+
         if(event.type == SDL_QUIT) play = false;
     }
 }
 
 void Engine::initGame(){
-    std::string firstLevel = "Test_Maze.txt";
+    std::string firstLevel = "test_open.txt";
     levels[0].init(firstLevel);
 
     std::string startPlayerImage = "player32.png";
     int numClipsPlayerSheet = 8;
     player.setLoc(levels[0].startX(), levels[0].startY());
-    player.setupCollider(5, 5, 10, 10);
+    player.setupCollider(5, 5, 20, 0);
+    player.updateCamera(levels[0]);
     player.setupSheet(screen, startPlayerImage, numClipsPlayerSheet, DOWN, 32, 2);
     player.init();
-
-
 }
-
-
-
-////////////////
-
-/*player.init();
-    levels[0].init("big.txt");
-    player.setCamera(levels[0]);
-
-    unsigned long timeCurr = SDL_GetTicks();
-    unsigned long timeDiff = 1;
-
-	timeFactor = 1;
-
-	while(play){
-	    timeCurr = SDL_GetTicks();
-
-		render();
-		processInput();
-		timeDiff = SDL_GetTicks() - timeCurr;
-		timeFactor = ((double)timeDiff)/((double)1000/16);
-	}*/
-
-	///////
-
-/*Direction playerDir;
-    //Uint8* keystates = SDL_GetKeyState(NULL);
-
-
-    }  else if (event.type == SDL_KEYUP) { playerDir = NONE; }
-
-	player.setActualDir(playerDir);
-    if(playerDir != NONE) { player.move(timeFactor, levels[0]); }*/
