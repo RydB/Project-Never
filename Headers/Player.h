@@ -12,7 +12,7 @@ public:
     static const int HEART_WIDTH;
 
     void move(Direction direction_input, const TileMap& currentlevel);
-    void animate();
+    void animate(const TileMap& currentlevel);
 
     void init(){ heart = uti::load_image(HEART); }
 
@@ -30,9 +30,9 @@ public:
         RIGHT1,
         RIGHT2,
         DOWN1,
-        DOWN2,
+        UP2,
         UP1,
-        UP2
+        DOWN2
     };
 
     static const std::string HEART;
@@ -41,7 +41,3 @@ public:
 };
 
 #endif //PLAYER_H
-
-
-
-
