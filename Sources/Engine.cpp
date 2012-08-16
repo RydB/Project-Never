@@ -25,33 +25,40 @@ void Engine::render(){
 }
 
 void Engine::processInput(){
+
+    Uint8* keystate = SDL_GetKeyState(NULL);
+    Direction playerDir = NONE;
+
+    if(keystate[SDLK_a])   playerDir = LEFT;
+    if(keystate[SDLK_d])   playerDir = RIGHT;
+    if(keystate[SDLK_w])  playerDir = UP;
+    if(keystate[SDLK_s])    playerDir = DOWN;
+
 	while(SDL_PollEvent(&event)){
-        Direction playerDir = NONE;
-
-        if(event.type == SDL_KEYDOWN){
-            switch(event.key.keysym.sym ){
-                case SDLK_w:
-                playerDir = UP;
-                break;
-                case SDLK_s:
-                playerDir = DOWN;
-                break;
-                case SDLK_a:
-                    playerDir = LEFT;
-                    break;
-                case SDLK_d:
-                    playerDir = RIGHT;
-                    break;
-                default:
-                break;
-            }
-
+        switch(event.type){
+            case SDL_QUIT:
+                play = false;
+            break;
+            case SDL_KEYDOWN:
+                if(event.key.keysym.sym == SDLK_ESCAPE) play = false;
+            break;
         }
-        player.move(playerDir, levels[currLevel]);
-        player.updateCamera(levels[currLevel]);
+	}
+    player.move(playerDir, levels[currLevel]);
+    player.updateCamera(levels[currLevel]);
+}
 
-        if(event.type == SDL_QUIT) play = false;
-    }
+void Engine::initGame(){
+    std::string firstLevel = "Test_Maze.txt";
+    levels[0].init(firstLevel);
+
+    std::string startPlayerImage = "player32.png";
+    int numClipsPlayerSheet = 8;
+    player.setLoc(levels[0].startX(), levels[0].startY());
+    player.setupCollider(5, 5, 20, 0);
+    player.updateCamera(levels[0]);
+    player.setupSheet(screen, startPlayerImage, numClipsPlayerSheet, DOWN, 32, 2);
+    player.init();
 }
 
 void Engine::initGame(){
